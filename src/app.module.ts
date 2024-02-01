@@ -7,6 +7,8 @@ import { V1Module } from './api/v1/v1.module';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { V1Controller } from './api/v1/v1.controller';
 //import { V1Module } from './api/v1/v1.module';
+import { AuthModule } from './api/auth/auth.module';
+import { UsersModule } from './api/users/users.module';
 
 @Module({
   imports:[ConfigModule.forRoot({ isGlobal: true}),
@@ -19,7 +21,7 @@ import { V1Controller } from './api/v1/v1.controller';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-    }), V1Module],
+    }), V1Module, AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

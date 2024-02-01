@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ScheduleInterface, UpdateScheduleInterface } from './Entity/Schedule.interface';
 import { Schedule } from './Entity/Schedule.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { CreateScheduleDto } from './dto/schedule.dto';
+import { CreateScheduleDto, UpdateScheduleDto } from './dto/schedule.dto';
 import { Request, Response } from 'express';
 
 
@@ -55,9 +55,10 @@ export class V1Controller {
     @HttpCode(200)
     update(
       @Param('id') id: string,
-      @Body() schedulePost: UpdateScheduleInterface,
+      @Body() body: UpdateScheduleDto,
     ): Observable<UpdateResult> {
-      return this.v1Service.updatePost(id, schedulePost);
+      const data: ScheduleInterface =body;
+      return this.v1Service.updatePost(id, data);
     }
 
     @Delete('deleteschedule/:id')
